@@ -3,6 +3,8 @@ package com.bae.main.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +28,8 @@ public class ClubController {
 
 	// Post Requests (CREATE) //
 	@PostMapping("/create")
-	public Club create(@RequestBody Club input) {
-	return service.create(input);	
+	public ResponseEntity <Club> create(@RequestBody Club input) {
+	return new ResponseEntity<Club>(service.create(input), HttpStatus.CREATED);	
 	}
 	
 	// Get Requests (READ) //

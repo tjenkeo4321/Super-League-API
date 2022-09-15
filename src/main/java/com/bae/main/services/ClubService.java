@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bae.main.entities.Club;
+import com.bae.main.exceptions.ClubNotFoundException;
 import com.bae.main.repos.ClubRepo;
 
 @Service
@@ -32,7 +33,7 @@ public List<Club> getAll() {
 
 
 public Club getById(long id) {
-	return repo.findById(id).get();
+	return repo.findById(id).orElseThrow(ClubNotFoundException::new);
 }
 
 public Club getByClubName(String clubName) {
@@ -40,7 +41,7 @@ public Club getByClubName(String clubName) {
 	}
 
 public Club update(long id, Club input) {
-	Club existing = repo.findById(id).get();
+	Club existing = repo.findById(id).orElseThrow(ClubNotFoundException::new);
 	
 	existing.setClubName(input.getClubName());
 	existing.setClubNationality(input.getClubNationality());
