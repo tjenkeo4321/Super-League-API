@@ -1,0 +1,1 @@
+INSERT INTO `club` (`club_name`, `club_nationality`, `club_titles`) VALUES ('Arsenal FC', 'England', 13);
