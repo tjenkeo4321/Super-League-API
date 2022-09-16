@@ -2,6 +2,7 @@ package com.bae.main.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -79,7 +80,17 @@ public class ClubControllerIntegrationTest {
 	}
 	@Test
 	public void updateTest() throws Exception {
+		Club input = new Club("Arsenal FC", "England", 14);
+		String inputAsJSON = mapper.writeValueAsString(input);
 		
+		Club response = new Club(2L, "Arsenal FC", "England", 14);
+		String responseAsJSON = mapper.writeValueAsString(response);
+		
+		mvc.perform(put("/club/update/1")
+		.contentType(MediaType.APPLICATION_JSON)
+		.content(inputAsJSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(responseAsJSON));
 	
 	}
 	@Test
