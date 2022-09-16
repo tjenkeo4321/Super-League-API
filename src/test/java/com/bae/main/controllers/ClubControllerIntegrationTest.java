@@ -1,6 +1,8 @@
 package com.bae.main.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,18 +55,50 @@ public class ClubControllerIntegrationTest {
 	}
 	@Test
 	public void getByIdTest() throws Exception {
+		Club result = new Club(1L, "Arsenal FC", "England", 13);
+		String resultAsJSON = mapper.writeValueAsString(result);
 		
+		mvc.perform(get("/club/getById/1")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(resultAsJSON));
+		
+		
+
 	}
 	@Test
 	public void getByClubNameTest() throws Exception {
+		List<Club> result = new ArrayList<>();
 		
+		result.add(new Club(1L, "Arsenal FC", "England", 13));
+		String resultAsJSON = mapper.writeValueAsString(result);
+		
+		mvc.perform(get("/club/getByClubName/Arsenal FC")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(resultAsJSON));
 	}
 	@Test
 	public void updateTest() throws Exception {
+		Club input = new Club("Arsenal FC", "England", 14);
+		String inputAsJSON = mapper.writeValueAsString(input);
 		
+		Club response = new Club(1L, "Arsenal FC", "England", 14);
+		String responseAsJSON = mapper.writeValueAsString(response);
+		
+		mvc.perform(put("/club/update/1")
+		.contentType(MediaType.APPLICATION_JSON)
+		.content(inputAsJSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(responseAsJSON));
+	
 	}
 	@Test
 	public void deleteTest() throws Exception {
+		mvc.perform(delete("/club/delete/1")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().string("true"));
 		
 	}
   	
