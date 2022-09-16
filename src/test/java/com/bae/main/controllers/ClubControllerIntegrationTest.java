@@ -53,7 +53,16 @@ public class ClubControllerIntegrationTest {
 	}
 	@Test
 	public void getByIdTest() throws Exception {
+		Club result = new Club(1L, "Arsenal FC", "England", 13);
+		String resultAsJSON = mapper.writeValueAsString(result);
 		
+		mvc.perform(get("/club/getById/1")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(resultAsJSON));
+		
+		
+
 	}
 	@Test
 	public void getByClubNameTest() throws Exception {
@@ -65,6 +74,10 @@ public class ClubControllerIntegrationTest {
 	}
 	@Test
 	public void deleteTest() throws Exception {
+		mvc.perform(delete("/club/delete/1")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().string("true"));
 		
 	}
   	
