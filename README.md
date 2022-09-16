@@ -13,3 +13,6 @@ The testing of the application can be done in in Post Man. The user can test for
 and performing different get requests. Alternatively, with the front end page, users can use buttons to interact with the list to test 
 what clubs come back. For instance, the user can request clubs from specific nationalities, and the application will return those clubs.
 
+
+Jira Board Link
+https://tosinjenkeo.atlassian.net/jira/software/projects/ASL/boards/2
