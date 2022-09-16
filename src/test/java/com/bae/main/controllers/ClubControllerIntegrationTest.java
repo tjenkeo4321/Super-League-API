@@ -67,11 +67,20 @@ public class ClubControllerIntegrationTest {
 	}
 	@Test
 	public void getByClubNameTest() throws Exception {
+		List<Club> result = new ArrayList<>();
 		
+		result.add(new Club(1L, "Arsenal FC", "England", 13));
+		String resultAsJSON = mapper.writeValueAsString(result);
+		
+		mvc.perform(get("/club/getByClubName/Arsenal FC")
+		.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(content().json(resultAsJSON));
 	}
 	@Test
 	public void updateTest() throws Exception {
 		
+	
 	}
 	@Test
 	public void deleteTest() throws Exception {
