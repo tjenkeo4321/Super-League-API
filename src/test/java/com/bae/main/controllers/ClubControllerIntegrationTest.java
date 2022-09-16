@@ -83,7 +83,7 @@ public class ClubControllerIntegrationTest {
 		Club input = new Club("Arsenal FC", "England", 14);
 		String inputAsJSON = mapper.writeValueAsString(input);
 		
-		Club response = new Club(2L, "Arsenal FC", "England", 14);
+		Club response = new Club(1L, "Arsenal FC", "England", 14);
 		String responseAsJSON = mapper.writeValueAsString(response);
 		
 		mvc.perform(put("/club/update/1")
